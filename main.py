@@ -1,6 +1,6 @@
 
-from transformers import pipeline
-# import openai
+
+import openai
 from youtube_transcript_api import YouTubeTranscriptApi
 from flask import Flask,render_template,request
 app = Flask(__name__)
