@@ -4,19 +4,19 @@ from transformers import pipeline
 from youtube_transcript_api import YouTubeTranscriptApi
 from flask import Flask,render_template,request
 app = Flask(__name__)
-summarizer = pipeline("summarization")
-# openai.api_key = "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"
 
-# def generate_response(prompt):
-#     response = openai.Completion.create(
-#         engine="text-davinci-002",
-#         prompt=prompt,
-#         max_tokens=60,
-#         n=1,
-#         stop=None,
-#         temperature=0.5,
-#     )
-#     return response.choices[0].text.strip()
+openai.api_key = "--------------------------------"
+
+def generate_response(prompt):
+    response = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=prompt,
+        max_tokens=60,
+        n=1,
+        stop=None,
+        temperature=0.5,
+    )
+    return response.choices[0].text.strip()
 # # summarizer=pipeline("summarization")
 
 
@@ -49,17 +49,13 @@ def success():
         for ele in transcript.fetch():
             text=text+ele['text']+" "
         print(text)
-        print()
-        print()
-        print()
-        print()
+       
 
-        summarys=summarizer(text, max_length=250, min_length=30, do_sample=False) 
-        print(summarys[0]['summary_text'])
-        # prompt="Summarize the text,text:"+text
-        # summary=generate_response(prompt)
-        # res=summarizer(text, max_length=250, min_length=30, do_sample=False)
-        # summary=res[0]['summary_text']
+
+        prompt="Summarize the text,text:"+text
+        summary=generate_response(prompt)
+        res=summarizer(text, max_length=250, min_length=30, do_sample=False)
+        summary=res[0]['summary_text']
 
 
 
